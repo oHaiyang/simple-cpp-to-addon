@@ -1,4 +1,3 @@
-#include <cstdio>
 #include <node.h>
 #include <string>
 #include <add.h> // import add from 'add'
@@ -12,8 +11,9 @@ using v8::Value;
 
 void Method(const FunctionCallbackInfo<Value>& args) {
   Isolate* isolate = args.GetIsolate();
+  auto ret_str = std::string("1 + 1 = ") + std::to_string(add(1, 1));
   args.GetReturnValue().Set(String::NewFromUtf8(
-      isolate, (std::string("1 + 1 = ") + std::to_string(add(1, 1))).c_str()).ToLocalChecked());
+      isolate, ret_str.c_str()).ToLocalChecked());
 }
 
 void Initialize(Local<Object> exports) {
